@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-</head>
-<body>
-    <header>
-        <nav>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'show_my_tasks' %}">My tasks</a></li>
-            <li><a href="{% url 'list_projects' %}">My projects</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            {%else%}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Signup</a></li>
-            {%endif%}
-        </nav>
-    </header>
-    <main>
+{%extends 'base.html'%}
+
+{%block title%}
+    Projects
+{%endblock title%}
+
+{%block content%}
+<main>
+    <div class="grid">
         <div>
             <h1>My Projects</h1>
             <p>
-                <a href="{% url 'create_project' %}">Create a new project</a>
+                <button><a href="{% url 'create_project' %}">Create a new project</a></button>
             </p>
+        </div>
+        <div>
             {% if projects|length == 0 %}
                 <p>You are not assigned to any projects</p>
             {% else %}
@@ -38,7 +28,7 @@
                 <tbody>
                     {% for project in projects %}
                     <tr>
-                        <td><a href="{% url 'show_project' project.id %}">{{project.name}}</a></td>
+                        <td class="left"><a href="{% url 'show_project' project.id %}" class="proj">{{project.name}}</a></td>
                         <td>{{project.tasks.all|length}}</td>
                     </tr>
                     {%endfor%}
@@ -46,6 +36,6 @@
             </table>
             {%endif%}
         </div>
-    </main>
-</body>
-</html>
+    </div>
+</main>
+{%endblock content%}

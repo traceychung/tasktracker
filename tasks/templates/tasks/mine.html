@@ -1,27 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tasks</title>
-</head>
-<body>
-    <header>
-        <nav>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'show_my_tasks' %}">My tasks</a></li>
-            <li><a href="{% url 'list_projects' %}">My projects</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            {%else%}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Signup</a></li>
-            {%endif%}
-        </nav>
-    </header>
-    <main>
+{%extends 'base.html'%}
+
+{%block title%}
+    My Tasks
+{%endblock title%}
+
+{%block content%}
+<main>
+    <div class="grid">
         <div>
             <h1>My Tasks</h1>
+            <p>
+                <button type="button"><a href="{% url 'create_task' %}">Create a new task</a></button>
+            </p>
+            </div>
+        <div>
             {% if tasks.all|length == 0 %}
             <p>You have no tasks</p>
             {% else %}
@@ -37,16 +30,16 @@
                 <tbody>
                     {% for task in tasks %}
                     <tr>
-                        <td>{{task.name}}</td>
-                        <td>{{task.start_date}}</td>
-                        <td>{{task.due_date}}</td>
-                        <td>{{task.is_complete|yesno:"yes,no"}}</td>
+                        <td class="left">{{task.name}}</td>
+                        <td>{{task.start_date|date:"n/j/y"}} </td>
+                        <td>{{task.due_date|date:"n/j/y"}}</td>
+                        <td>{{task.is_complete|yesno:"Yes,No"}}</td>
                     </tr>
                     {%endfor%}
                 </tbody>
             </table>
             {%endif%}
         </div>
-    </main>
-</body>
-</html>
+    </div>
+</main>
+{%endblock content%}
