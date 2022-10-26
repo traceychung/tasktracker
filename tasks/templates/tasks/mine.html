@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
-{%block title%}
+{% block title %}
     My Tasks
-{%endblock title%}
-
-{%block content%}
-<main>
-    <div class="grid">
+{% endblock title %}
+{% block content %}
+    <main>
         <div>
-            <h1>My Tasks</h1>
-            <p>
-                <button type="button"><a href="{% url 'create_task' %}">Create a new task</a></button>
+            <h1 class="center">My Tasks</h1>
+            <p class="center">
+                <button type="button">
+                    <a href="{% url 'create_task' %}">Create a new task</a>
+                </button>
             </p>
-            </div>
-        <div>
             {% if tasks.all|length == 0 %}
-            <p>You have no tasks</p>
+                <p class="center">You have no tasks</p>
             {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Start date</th>
-                        <th>Due date</th>
-                        <th>Is completed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks %}
-                    <tr>
-                        <td class="left">{{task.name}}</td>
-                        <td>{{task.start_date|date:"n/j/y"}} </td>
-                        <td>{{task.due_date|date:"n/j/y"}}</td>
-                        <td>{{task.is_complete|yesno:"Yes,No"}}</td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-            {%endif%}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>Due date</th>
+                            <th>Is completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td class="left">{{ task.name }}</td>
+                                <td>{{ task.start_date }}</td>
+                                <td>{{ task.due_date }}</td>
+                                <td>{{ task.is_completed|yesno:"Yes,No" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
-    </div>
-</main>
-{%endblock content%}
+    </main>
+{% endblock content %}

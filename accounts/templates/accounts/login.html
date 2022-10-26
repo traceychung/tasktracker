@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
-{%block title%}
+{% block title %}
     Login
-{%endblock title%}
-
-{%block content%}
-<main>
-    <div>
-        <h1>Login</h1>
-        <form method="post">
-            {%csrf_token%}
-            {{form.as_p}}
-            <button>Login</button>
-    </div>
-</main>
-{%endblock content%}
+{% endblock title %}
+{% block content %}
+    <main>
+        <div>
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Login</button>
+            </div>
+        </main>
+    {% endblock content %}

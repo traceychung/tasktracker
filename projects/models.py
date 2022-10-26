@@ -7,8 +7,8 @@ class Project(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(
         User,
-        related_name = "projects",
-        on_delete = models.CASCADE,
+        related_name="projects",
+        on_delete=models.CASCADE,
         null=True,
     )
 

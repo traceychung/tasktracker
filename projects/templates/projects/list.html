@@ -1,41 +1,40 @@
 <!DOCTYPE html>
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
-{%block title%}
+{% block title %}
     Projects
-{%endblock title%}
-
-{%block content%}
-<main>
-    <div class="grid">
+{% endblock title %}
+{% block content %}
+    <main>
         <div>
-            <h1>My Projects</h1>
-            <p>
-                <button><a href="{% url 'create_project' %}">Create a new project</a></button>
+            <h1 class="center">My Projects</h1>
+            <p class="center">
+                <button class="create">
+                    <a href="{% url 'create_project' %}">Create a new project</a>
+                </button>
             </p>
-        </div>
-        <div>
             {% if projects|length == 0 %}
-                <p>You are not assigned to any projects</p>
+                <p class="center">You are not assigned to any projects</p>
             {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Number of tasks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for project in projects %}
-                    <tr>
-                        <td class="left"><a href="{% url 'show_project' project.id %}" class="proj">{{project.name}}</a></td>
-                        <td>{{project.tasks.all|length}}</td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-            {%endif%}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of tasks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for project in projects %}
+                            <tr>
+                                <td class="left">
+                                    <a href="{% url 'show_project' project.id %}" class="proj">{{ project.name }}</a>
+                                </td>
+                                <td>{{ project.tasks.all|length }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
-    </div>
-</main>
-{%endblock content%}
+    </main>
+{% endblock content %}

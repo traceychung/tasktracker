@@ -10,14 +10,14 @@ class Task(models.Model):
     is_completed = models.BooleanField(default=False)
     project = models.ForeignKey(
         Project,
-        related_name = "tasks",
-        on_delete = models.CASCADE,
+        related_name="tasks",
+        on_delete=models.CASCADE,
     )
     assignee = models.ForeignKey(
         User,
-        null = True,
-        related_name = "tasks",
-        on_delete = models.CASCADE,
+        null=True,
+        related_name="tasks",
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
